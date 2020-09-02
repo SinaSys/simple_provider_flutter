@@ -6,15 +6,14 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  final String data = "This is text from Root";
   @override
   Widget build(BuildContext context) {
-    return Provider<String>(
-      create: (context)=>data,
+    return ChangeNotifierProvider<Data>(
+      create: (context)=>Data(),
       child: MaterialApp(
         home: Scaffold(
           appBar: AppBar(
-            title: Text("Provider"),
+            title: MyText(),
           ),
           body: Level3(),
         ),
@@ -26,26 +25,41 @@ class MyApp extends StatelessWidget {
 
 
 
-
-
 class Level1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      // child: Level2(),
+       child: Level2(),
     );
   }
 }
-
 
 class Level2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // child:Level3(),
+    return Column(
+      children: [
+        MyTextField(),
+        Level3()
+      ],
     );
+  }
+}
+
+
+class MyTextField extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+class MyText extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Text(Provider.of<Data>(context).data);
   }
 }
 
@@ -57,11 +71,13 @@ class Level3 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 200,height: 200, color: Colors.yellow,
-      child: Text(Provider.of<String>(context),style: TextStyle(
-          fontSize: 40,color: Colors.red
-      ),),
+      child: Text(Provider.of<Data>(context).data),
     );
   }
+}
+
+class Data extends ChangeNotifier{
+  String data = "someDate";
 }
 
 
