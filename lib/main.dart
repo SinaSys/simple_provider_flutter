@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
           appBar: AppBar(
             title: MyText(),
           ),
-          body: Level3(),
+          body: Level1(),
         ),
       ),
     );
@@ -52,7 +52,11 @@ class Level2 extends StatelessWidget {
 class MyTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return TextField(
+      onChanged: (newText){
+        Provider.of<Data>(context).changeString(newText);
+      },
+    );
   }
 }
 
@@ -62,7 +66,6 @@ class MyText extends StatelessWidget {
     return Text(Provider.of<Data>(context).data);
   }
 }
-
 
 
 class Level3 extends StatelessWidget {
@@ -78,6 +81,12 @@ class Level3 extends StatelessWidget {
 
 class Data extends ChangeNotifier{
   String data = "someDate";
+
+  void changeString(String newString){
+    data = newString;
+    notifyListeners();
+  }
+
 }
 
 
