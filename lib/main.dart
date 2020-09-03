@@ -48,7 +48,6 @@ class Level2 extends StatelessWidget {
   }
 }
 
-
 class MyTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -63,7 +62,7 @@ class MyTextField extends StatelessWidget {
 class MyText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Text(Provider.of<Data>(context).data);
+    return Text(Provider.of<Data>(context,listen: false).data);
   }
 }
 
@@ -86,7 +85,6 @@ class Data extends ChangeNotifier{
     data = newString;
     notifyListeners();
   }
-
 }
 
 
